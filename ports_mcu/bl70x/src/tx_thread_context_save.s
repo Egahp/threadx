@@ -175,10 +175,10 @@ _tx_thread_not_nested_save:
     lw      t1, _tx_thread_current_ptr                  /*!< Pickup current thread pointer */ 
     sw      sp, 8(t1)                                   /*!< Save stack pointer*/
 
-/*#ifdef TX_ENABLE_EXECUTION_CHANGE_NOTIFY*/
+#ifdef TX_ENABLE_EXECUTION_CHANGE_NOTIFY
     /* _tx_execution_isr_enter is called with thread stack pointer */
-    /*call    _tx_execution_isr_enter*/                     /*!< Call the ISR execution enter function */ 
-/*#endif*/
+    call    _tx_execution_isr_enter                     /*!< Call the ISR execution enter function */ 
+#endif
 
 
     lw      sp, _tx_thread_system_stack_ptr             /*!< Switch to system stack */ 
@@ -191,9 +191,9 @@ _tx_thread_not_nested_save:
 _tx_thread_idle_system_save:
 
 
-/*#ifdef TX_ENABLE_EXECUTION_CHANGE_NOTIFY*/
-    /*call    _tx_execution_isr_enter*/                     /*!< Call the ISR execution enter function */ 
-/*#endif*/
+#ifdef TX_ENABLE_EXECUTION_CHANGE_NOTIFY
+    call    _tx_execution_isr_enter                     /*!< Call the ISR execution enter function */ 
+#endif
 
     /* Interrupt occurred in the scheduling loop.  */
 
